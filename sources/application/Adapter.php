@@ -35,7 +35,14 @@ class Adapter
     public function getConnection()
     {
         $conf = Config::getInstance()->getConfig();
-        $this->connection = new \PDO("mysql:host={$conf->db->host};dbname={$conf->db->name}", $conf->db->user, $conf->db->password);
+        //try {
+            $this->connection = new \PDO("mysql:host={$conf->db->host};dbname={$conf->db->name}", $conf->db->user, $conf->db->password);
+//        } catch (\PDOException $e) {
+//            echo $e->getMessage();
+//            var_dump(324234324);
+//            var_dump($this->connection);
+//            die();
+//        }
     }
 
     /**
@@ -65,7 +72,7 @@ class Adapter
             $stmt->execute($args);
             $this->dropConnection();
         } catch (\PDOException $e) {
-            Logger::getInstance()->debug("Error is thrown with message - " . $e->getMessage());
+            Logger::getInstance()->warn("Error is thrown with message - " . $e->getMessage());
         }
     }
 }

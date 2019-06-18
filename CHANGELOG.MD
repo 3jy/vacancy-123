@@ -3,3 +3,4 @@
     - Application files moved in application directory and application namespace
     - Added log files rotation in Logger
     - Logger not rewrite log file anymore
+    - Added error handler

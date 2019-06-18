@@ -41,8 +41,9 @@ class ErrorHandler
 
     /**
      * обработчик пропущенных исключений
+     * @param \Throwable $ex
      */
-    public function handleException(\Exception $ex)
+    public function handleException(\Throwable $ex)
     {
         $msg = 'Exception: ' . PHP_EOL . $ex->getMessage() . PHP_EOL .
             'File: ' . $ex->getFile() . ':' . $ex->getLine() . PHP_EOL .
