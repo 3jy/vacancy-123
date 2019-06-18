@@ -36,6 +36,7 @@ class Adapter
     {
         $conf = Config::getInstance()->getConfig();
         $this->connection = new \PDO("mysql:host={$conf->db->host};dbname={$conf->db->name}", $conf->db->user, $conf->db->password);
+        $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -55,10 +56,26 @@ class Adapter
     {
         try {
             $this->getConnection();
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $stmt = $this->connection->prepare($query);
             $stmt->execute($args);
             $this->dropConnection();
+        } catch (\PDOException $e) {
+            Logger::getInstance()->warn("Error is thrown with message - " . $e->getMessage());
+        }
+    }
+
+    /**
+     * @param string $query
+     * @return array
+     */
+    public function selectAll($query)
+    {
+        try {
+            $this->getConnection();
+            $stmt = $this->connection->query($query);
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $this->dropConnection();
+            return $result;
         } catch (\PDOException $e) {
             Logger::getInstance()->warn("Error is thrown with message - " . $e->getMessage());
         }
