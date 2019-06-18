@@ -35,14 +35,7 @@ class Adapter
     public function getConnection()
     {
         $conf = Config::getInstance()->getConfig();
-        //try {
-            $this->connection = new \PDO("mysql:host={$conf->db->host};dbname={$conf->db->name}", $conf->db->user, $conf->db->password);
-//        } catch (\PDOException $e) {
-//            echo $e->getMessage();
-//            var_dump(324234324);
-//            var_dump($this->connection);
-//            die();
-//        }
+        $this->connection = new \PDO("mysql:host={$conf->db->host};dbname={$conf->db->name}", $conf->db->user, $conf->db->password);
     }
 
     /**
@@ -63,12 +56,7 @@ class Adapter
         try {
             $this->getConnection();
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
             $stmt = $this->connection->prepare($query);
-            if (!is_array($args)) {
-                $args = [$args];
-            }
-
             $stmt->execute($args);
             $this->dropConnection();
         } catch (\PDOException $e) {

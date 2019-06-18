@@ -38,19 +38,16 @@ class Loader
     private function parse($content)
     {
         Logger::getInstance()->info("Starting to parse file");
-        $needleFields = [0, 1, 5];
-        array_walk($content, function ($entry) use ($needleFields) {
-            $fieldsToInsert = [];
-            array_walk($entry, function ($entryField, $index) use ($fieldsToInsert, $needleFields) {
-                if (in_array($index, $needleFields) && !empty($entryField)) {
-                    $fieldsToInsert[] = $entryField;
-                }
-            });
 
-            $fieldsToInsert[] = date("Y-m-d");
+        foreach ($content as $row) {
+            $idValue = $row[0];
+            $price = $row[1];
+            $isNoon = $row[5];
+            $date = date("Y-m-d");
+
             $query = "INSERT INTO `market_data` (id_value, price, is_noon, update_date) VALUES (?, ?, ?, ?)";
-            Adapter::getInstance()->exec($query, $fieldsToInsert);
-        });
+            Adapter::getInstance()->exec($query, [$idValue, $price, $isNoon, $date]);
+        }
 
         Logger::getInstance()->info("File parsing is finished");
     }
