@@ -1,41 +1,51 @@
 <?php
 
-namespace Application;
+namespace application;
 
-defined("APP_PATH")  || define("APP_PATH", realpath(dirname(__FILE__)));
-defined("ROOT_PATH") || define("ROOT_PATH",  APP_PATH . "/..");
-defined("CONF_PATH") || define("CONF_PATH", ROOT_PATH . "/conf");
-defined("LOG_PATH")  || define("LOG_PATH", ROOT_PATH . "/logs");
-defined("APP_ENV")   || define("APP_ENV", getenv("APP_ENV") ?? "dev");
+defined("APP_PATH") || define("APP_PATH", realpath(dirname(__FILE__)));
+defined("ROOT_PATH") || define("ROOT_PATH", APP_PATH . "/..");
+defined("CONF_PATH") || define("CONF_PATH", ROOT_PATH . "/config");
+defined("LOG_PATH") || define("LOG_PATH", ROOT_PATH . "/logs");
+defined("APP_ENV") || define("APP_ENV", getenv("APP_ENV") ?? "dev");
 
-require_once (APP_PATH . "/Log/Logger.php");
-require_once (APP_PATH . "/Loader/Loader.php");
+/**
+ * Class Core
+ * @package application
+ */
+class Core
+{
+    /**
+     * @var Loader
+     */
+    private $loader;
 
-use Application\Log\Logger as Logger;
-use Application\Loader\Loader as Loader;
+    /**
+     * Core constructor.
+     */
+    public function __construct()
+    {
+        $errorHandler = new ErrorHandler();
+        $errorHandler->init();
 
-class Core {
+        Logger::getInstance()->info("Core instance created");
+    }
 
-	private $loader;
+    /**
+     * @return Loader
+     */
+    public function getLoader()
+    {
+        Logger::getInstance()->info("Core::getLoader");
+        if (!isset($this->loader)) {
+            $this->createLoader();
+        }
 
-	public function __construct(){
-		Logger::getInst()->info("Core instance created");
-	}
+        return $this->loader;
+    }
 
-	/**
-	 * @return Loader
-	 */
-	public function getLoader() {
-		Logger::getInst()->info("Core::getLoader");
-		if (!isset($this->loader)) {
-			$this->createLoader();
-		}
-
-		return $this->loader;
-	}
-
-	private function createLoader() {
-		Logger::getInst()->info("Core::createLoader");
-		$this->loader = new Loader();
-	}
+    private function createLoader()
+    {
+        Logger::getInstance()->info("Core::createLoader");
+        $this->loader = new Loader();
+    }
 }

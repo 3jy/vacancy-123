@@ -1,3 +1,11 @@
+# usage
+ - composer install
+ - php cli.php %path/to/file%
+ 
+ 
+ 
+ 
+
 # Тестовое задание для PHP-разработчика
 
 ## Технические требования

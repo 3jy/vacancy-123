@@ -1,7 +1,11 @@
-[INFO][28-02-2018 10:17:33]: Core instance created
-[INFO][28-02-2018 10:17:33]: Core::getLoader
-[INFO][28-02-2018 10:17:33]: Core::createLoader
-[INFO][28-02-2018 10:17:33]: Starting to load file \load-files\market.eu.20180227
-[INFO][28-02-2018 10:17:33]: Starting to parse file
-[INFO][28-02-2018 10:17:33]: File parsing is finished
-[INFO][28-02-2018 10:17:33]: File load is finished
+[INFO][18-06-2019 06:20:45]: Core instance created
+[INFO][18-06-2019 06:20:45]: Core::getLoader
+[INFO][18-06-2019 06:20:45]: Core::createLoader
+[INFO][18-06-2019 06:20:45]: Starting to load file /home/yyy/projects/vacancy/load-files/market.eu.20180227
+[INFO][18-06-2019 06:20:45]: Starting to parse file
+[INFO][18-06-2019 06:20:45]: File parsing is finished
+[INFO][18-06-2019 06:20:45]: File load is finished
+[INFO][18-06-2019 06:23:04]: Core instance created
+[INFO][18-06-2019 06:23:04]: Core::getLoader
+[INFO][18-06-2019 06:23:04]: Core::createLoader
+[INFO][18-06-2019 06:23:04]: Starting to load file /home/yyy/projects/vacancy/load-files/market.eu.20180227
